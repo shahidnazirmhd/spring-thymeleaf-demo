@@ -1,44 +1,35 @@
 services:
-  postgres:
-    container_name: postgres-sql-iam
-    image: postgres
-    environment:
-      POSTGRES_USER: username
-      POSTGRES_PASSWORD: password
-      PGDATA: /var/lib/postgresql/data
-      POSTGRES_DB: iam
-    volumes:
-      - postgres:/data/postgres
-    ports:
-      - 5432:5432
-    networks:
-      - iam-main
-    restart: unless-stopped
   pgadmin:
-    container_name: pgadmin
     image: dpage/pgadmin4
+    restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_DEFAULT_EMAIL: admin@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin     
+      PGADMIN_CONFIG_WTF_CSRF_HEADERS: '["Referer", "Origin"]'
+      PGADMIN_CONFIG_WTF_CSRF_ENABLED: 'False'
     volumes:
-      - pgadmin:/var/lib/pgadmin
+      - pgadmin-data:/var/lib/pgadmin
     ports:
       - 5050:80
-    networks:
-      - iam-main
-    restart: unless-stopped  
-  # mail-dev:
-  #   container_name: mail-dev-bsn
-  #   image: maildev/maildev
-  #   ports:
-  #     - 1080:1080
-  #     - 1025:1025
-networks:
-  iam-main:
-    driver: bridge
+    depends_on:
+      - db
 
+  db:
+    image: postgres
+    restart: always          
+    environment: 
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: changepassword
+      POSTGRES_DB: iam
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+      # PGHBA_CONF_CONTENT: |
+      #   host    all             all             0.0.0.0/0               md5    
+      # - ./pgdata:/var/lib/postgresql/data
+      # host    all             all             0.0.0.0/0               trust
+    volumes:                 
+      - pg-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 volumes:
-  postgres:
-    driver: local
-  pgadmin:  
+  pgadmin-data:
+  pg-data:
