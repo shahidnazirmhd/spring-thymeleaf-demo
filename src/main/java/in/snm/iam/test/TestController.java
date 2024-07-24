@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/test")
+@RequestMapping(path = "test")
 @AllArgsConstructor
 public class TestController {
 
