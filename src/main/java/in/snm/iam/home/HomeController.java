@@ -10,8 +10,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class HomeController {
     
     @GetMapping("/")
+    public String viewIndexPage() {
+        return "home";
+    }
+
+    @GetMapping("/home")
     public String viewHomePage() {
-        return "index";
+        return "home";
+    }
+
+    @GetMapping("/login")
+    public String viewLoginPage() {
+        return "login";
+    }
+
+    @GetMapping("/hello")
+    public String viewGreetPage() {
+        return "hello";
     }
     
 }

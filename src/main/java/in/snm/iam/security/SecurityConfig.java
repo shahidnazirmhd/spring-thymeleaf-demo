@@ -18,32 +18,28 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
-    private final AuthenticationProvider authenticationProvider;
-    private final JwtAuthFilter jwtAuthFilter;
 
-    private static final String[] WHITE_LIST_URL = {
-            "/about/*",
-            "/css/*",
-            "/js/*",
-            "/*",
-            "index",
-        };
+    // private static final String[] WHITE_LIST_URL = {
+    //         "/about/*",
+    //         "/css/*",
+    //         "/js/*",
+    //         "/*",
+    //         "index",
+    //     };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .cors(Customizer.withDefaults())
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request ->
-                            request.requestMatchers(
-                                            WHITE_LIST_URL
-                            ).permitAll()
-                                    .anyRequest()
-                                    .authenticated()
-                        )
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+        .authorizeHttpRequests((requests) -> requests
+        .requestMatchers("/", "/home").permitAll()
+        .anyRequest().authenticated()
+    )
+    .formLogin((form) -> form
+        .loginPage("/login")
+        .permitAll()
+    )
+    .logout((logout) -> logout.permitAll());
+
         return httpSecurity.build();
     }
 }
