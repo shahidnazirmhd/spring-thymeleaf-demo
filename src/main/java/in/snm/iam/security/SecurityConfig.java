@@ -12,11 +12,13 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-@EnableMethodSecurity(securedEnabled = true)
+// @EnableMethodSecurity(securedEnabled = true)
+@EnableJdbcHttpSession
 public class SecurityConfig {
 
     // private static final String[] WHITE_LIST_URL = {
@@ -36,9 +38,19 @@ public class SecurityConfig {
     )
     .formLogin((form) -> form
         .loginPage("/login")
+        .defaultSuccessUrl("/hello", true)
         .permitAll()
     )
-    .logout((logout) -> logout.permitAll());
+    .sessionManagement(session -> session
+    .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+            .invalidSessionUrl("/logout?expired")
+            .maximumSessions(1)
+            .maxSessionsPreventsLogin(false)
+        )
+    .logout((logout) -> logout
+                .deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true)
+                .permitAll());
 
         return httpSecurity.build();
     }

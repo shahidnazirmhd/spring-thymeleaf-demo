@@ -23,29 +23,29 @@ public class IamApplication {
 		SpringApplication.run(IamApplication.class, args);
 	}
 
-	// @Bean
-	// public CommandLineRunner runner(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
-	// 	return args -> {
-	// 		if (roleRepository.findByName("ADMIN").isEmpty()) {
-	// 			roleRepository.save(Role.builder().name("ADMIN").build());
-	// 		}
-	// 		var userRole =
-    //     roleRepository.findByName("ADMIN")
-    //             //TODO:Make exception handling better
-    //             .orElseThrow(() -> new NoSuchElementException("Role USER was not initialized"));
-    // var user =
-    //     User.builder()
-    //         .firstname("Shahid Nazir")
-    //         .lastname("Zaheer Husain")
-    //         .email("shahidnazirmhd@gmail.com")
-    //         .password(passwordEncoder.encode(""))
-    //         .accountLocked(false)
-    //         .enabled(true)
-    //         .roles(List.of(userRole))
-    //         .build();
-    // 	userRepository.save(user);
+	@Bean
+	public CommandLineRunner runner(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+		return args -> {
+			if (roleRepository.findByName("ADMIN").isEmpty()) {
+				roleRepository.save(Role.builder().name("ADMIN").build());
+			}
+			var userRole =
+        roleRepository.findByName("ADMIN")
+                //TODO:Make exception handling better
+                .orElseThrow(() -> new NoSuchElementException("Role USER was not initialized"));
+    var user =
+        User.builder()
+            .firstname("Shahid Nazir")
+            .lastname("Zaheer Husain")
+            .email("admin@example.com")
+            .password(passwordEncoder.encode("123"))
+            .accountLocked(false)
+            .enabled(true)
+            .roles(List.of(userRole))
+            .build();
+    	userRepository.save(user);
 
-	// 	};
-	// }
+		};
+	}
 
 }
