@@ -51,8 +51,8 @@ public class AuthProviderConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // @Bean
-    // public AuditorAware<Long> auditorAware() {
-    //     return new ApplicationAuditAware();
-    // }
+    @Bean
+    public AuditorAware<Long> auditorAware() {
+        return new ApplicationAuditAware();
+    }
 } 

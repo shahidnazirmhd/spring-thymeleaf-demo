@@ -13,7 +13,7 @@ import in.snm.iam.user.User;
 import in.snm.iam.user.UserRepository;
 
 @SpringBootApplication
-// @EnableJpaAuditing(auditorAwareRef = "auditorAware")
+@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class IamApplication {
 
 	public static void main(String[] args) {
