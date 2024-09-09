@@ -1,7 +1,5 @@
 package in.snm.iam;
 
-import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,13 +8,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import in.snm.iam.role.Role;
-import in.snm.iam.role.RoleRepository;
+import in.snm.iam.user.Role;
 import in.snm.iam.user.User;
 import in.snm.iam.user.UserRepository;
 
 @SpringBootApplication
-@EnableJpaAuditing(auditorAwareRef = "auditorAware")
+// @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class IamApplication {
 
 	public static void main(String[] args) {
@@ -24,28 +21,18 @@ public class IamApplication {
 	}
 
 	@Bean
-	public CommandLineRunner runner(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
-		return args -> {
-			if (roleRepository.findByName("ADMIN").isEmpty()) {
-				roleRepository.save(Role.builder().name("ADMIN").build());
-			}
-			var userRole =
-        roleRepository.findByName("ADMIN")
-                //TODO:Make exception handling better
-                .orElseThrow(() -> new NoSuchElementException("Role USER was not initialized"));
-    var user =
+	public CommandLineRunner runner(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+            return args -> {
+                var user =
         User.builder()
             .firstname("Shahid Nazir")
             .lastname("Zaheer Husain")
-            .email("admin@example.com")
+            .email("admin@app.this")
             .password(passwordEncoder.encode("123"))
-            .accountLocked(false)
-            .enabled(true)
-            .roles(List.of(userRole))
+            .role(Role.ADMIN)
             .build();
     	userRepository.save(user);
-
-		};
+            };
 	}
-
 }
+ 
