@@ -46,6 +46,12 @@ public class SecurityConfig {
 								.maxSessionsPreventsLogin(true)
 						)
 				);
+                // .sessionManagement((sessions) -> sessions
+				// 		.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                //         .invalidSessionUrl("/logout?expired")
+                //         .sessionFixation().newSession()
+                //         .maximumSessions(1)
+                //         .maxSessionsPreventsLogin(true)
     // .logout((logout) -> logout
     //             .deleteCookies("JSESSIONID")
     //             .invalidateHttpSession(true)
