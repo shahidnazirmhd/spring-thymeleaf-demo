@@ -35,26 +35,30 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
         .authorizeHttpRequests((requests) -> requests
-       // .requestMatchers("").permitAll()
-        .anyRequest().authenticated()
-    )
-    .formLogin(Customizer.withDefaults())
+				.requestMatchers("/").permitAll()
+				.anyRequest().authenticated()
+			)
+			.formLogin((form) -> form
+				.loginPage("/login")
+				.permitAll()
+			)
     .sessionManagement((sessions) -> sessions
 						.sessionConcurrency((concurrency) -> concurrency
 								.maximumSessions(1)
 								.maxSessionsPreventsLogin(true)
+                                .expiredUrl("/login?expired")
 						)
-				);
+                        
+				)
                 // .sessionManagement((sessions) -> sessions
 				// 		.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
                 //         .invalidSessionUrl("/logout?expired")
                 //         .sessionFixation().newSession()
                 //         .maximumSessions(1)
                 //         .maxSessionsPreventsLogin(true)
-    // .logout((logout) -> logout
-    //             .deleteCookies("JSESSIONID")
-    //             .invalidateHttpSession(true)
-    //             .permitAll());
+    .logout((logout) -> logout
+                .deleteCookies("JSESSIONID")
+                .permitAll());
 
         return httpSecurity.build();
     }

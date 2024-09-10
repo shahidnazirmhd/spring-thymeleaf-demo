@@ -4,6 +4,8 @@ server:
     Session:
       timeout: 30m
 spring:
+  thymeleaf:
+    cache: false
   datasource:
     url: jdbc:postgresql://localhost:5432/iam
     username: username
