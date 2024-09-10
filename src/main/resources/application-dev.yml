@@ -1,12 +1,9 @@
 server:
   port: 8088
+  servlet:
+    Session:
+      timeout: 30m
 spring:
-  session:
-    store-type: jdbc
-    timeout: 30m
-    jdbc:
-      table-name: SPRING_SESSION
-      initialize-schema: always
   datasource:
     url: jdbc:postgresql://localhost:5432/iam
     username: username
