@@ -1,4 +1,4 @@
-package in.snm.iam.user;
+package in.snm.demo.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

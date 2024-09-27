@@ -1,10 +1,10 @@
-package in.snm.iam;
+package in.snm.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class IamApplicationTests {
+class ThymeleafDemoApplicationTests {
 
 	@Test
 	void contextLoads() {

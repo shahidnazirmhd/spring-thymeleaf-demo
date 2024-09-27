@@ -1,4 +1,4 @@
-package in.snm.iam.security;
+package in.snm.demo.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

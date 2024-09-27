@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>in.snm</groupId>
-	<artifactId>iam</artifactId>
+	<artifactId>thymeleaf-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>iam</name>
-	<description>My Website</description>
+	<name>thymeleaf-demo</name>
+	<description>thymeleaf-demo</description>
 	<url/>
 	<licenses>
 		<license/>

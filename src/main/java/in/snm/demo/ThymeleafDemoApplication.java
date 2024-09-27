@@ -1,4 +1,4 @@
-package in.snm.iam;
+package in.snm.demo;
 
 
 import org.springframework.boot.CommandLineRunner;
@@ -8,16 +8,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import in.snm.iam.user.Role;
-import in.snm.iam.user.User;
-import in.snm.iam.user.UserRepository;
+import in.snm.demo.user.Role;
+import in.snm.demo.user.User;
+import in.snm.demo.user.UserRepository;
 
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
-public class IamApplication {
+public class ThymeleafDemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(IamApplication.class, args);
+		SpringApplication.run(ThymeleafDemoApplication.class, args);
 	}
 
 	@Bean

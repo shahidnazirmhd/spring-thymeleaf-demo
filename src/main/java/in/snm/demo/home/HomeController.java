@@ -1,4 +1,4 @@
-package in.snm.iam.home;
+package in.snm.demo.home;
 
 
 import org.springframework.stereotype.Controller;

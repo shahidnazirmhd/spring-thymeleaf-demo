@@ -1,4 +1,4 @@
-package in.snm.iam.user;
+package in.snm.demo.user;
 
 public enum Role {
     USER,

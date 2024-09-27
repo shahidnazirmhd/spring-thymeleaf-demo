@@ -1,4 +1,4 @@
-package in.snm.iam.security;
+package in.snm.demo.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
-import in.snm.iam.user.UserRepository;
+import in.snm.demo.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 
 @Configuration

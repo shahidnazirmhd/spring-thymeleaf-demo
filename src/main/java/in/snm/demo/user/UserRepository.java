@@ -1,4 +1,4 @@
-package in.snm.iam.user;
+package in.snm.demo.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
